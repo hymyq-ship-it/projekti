@@ -16,12 +16,11 @@ def start_game():
     
 
 import random
+
 #Pulmakysymykset: lista sanakirjoja (kysymys, vastaus)
-puzzles = [ 
-    {"kysymys": "Mikä lentää ilman siipiä?", "vastaus": "aika"},
-    {"kysymys": "Paljonko on 7 * 8?", "vastaus": "56"},
-     {"kysymys": "Mikä maa alkaa kirjaimella S ja siellä on Eiffel-torni? (vihje: ei ala S:llä!)", "vastaus": "ranska"},
-       ]
+import puzzle
+puzzles = puzzle.puzzles
+
 def ratkaise_pulmat(maara):
      pisteet=0
      kysymykset = random.sample(puzzles, maara)  
