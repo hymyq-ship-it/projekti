@@ -11,4 +11,39 @@ def start_game():
     print(f" olet {current_airport} lentokentä nyt. sinun matka on alkanyt ja  ")
 
 min()
-current_airport = get_first_airport_id()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
