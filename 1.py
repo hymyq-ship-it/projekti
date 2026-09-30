@@ -1,2 +1,0 @@
-def min():
-    print("Tervetuloa")
