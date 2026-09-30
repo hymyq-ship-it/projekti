@@ -28,12 +28,10 @@ def ratkaise_pulmat(maara):
      
     # satunnainen valinta
      for p in kysymykset:
-        vastaus = input(f"\n🧩 {p['kysymys jos haluat vaihta kysymystä näppäin tyhjä merkijono()']} ").strip().lower() 
+        vastaus = input(f"\n🧩 {p['kysymys']} ").strip().lower() 
         if vastaus == p["vastaus"]: 
             print("✅ Oikein! +1 piste") 
             pisteet += 1 
-        elif vastaus== ( ):
-            vastaus = input(f"\n🧩 {p['kysymys jos haluat vaihta kysymystä näppäin tyhjä merkijono()']} ").strip().lower() 
         else:
             print(f"❌ Väärin! Oikea vastaus: {p['vastaus']}")
         return pisteet
