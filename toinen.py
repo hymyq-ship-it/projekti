@@ -11,7 +11,6 @@ def connect_db():
         password=salasana,
         database="flight_game"
     )
-from db import connect_db
 
 db = connect_db()
 print("Yhteys toimii!")
