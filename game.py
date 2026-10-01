@@ -1,5 +1,5 @@
 import math
-from airport_logic import get_airport,get_maanosat,get_maat
+from airport_logic import get_airport,get_maanosat,get_maat,get_lentokentat
 from distance import haversine
 from puzzle import puzzles
 import random
@@ -62,7 +62,8 @@ def main():
 
     current_ident = "EFHK"  # Helsinki-Vantaa
     continent = str(maanosa())
-    maa(continent)
+    country = maa(continent)
+    kohde = lentokentta(country)
     #kohde = input("Anna kohteen ICAO-koodi (esim. EGLL, KJFK): ").upper()
 
     jaljella = osta_tiketti(current_ident, kohde)
@@ -107,7 +108,7 @@ def maanosa():
     print(annum)
     return annum
 
-def maa(continent): # default on EU
+def maa(continent):
     print()
     maat_maanosassa = get_maat(maanosa=continent)
     num = -1
@@ -125,6 +126,30 @@ def maa(continent): # default on EU
                 print("Anna oikean maan numero.")
                 continue
             annum = maat_maanosassa[int(kohde)][0]
+            break
+        except:
+            print("Anna numero.")
+    print(annum)
+    return annum
+
+def lentokentta(country):
+    print()
+    lentokentat = get_lentokentat(maa=country)
+    num = -1
+    for i in lentokentat:
+        num+=1
+        print(f"{num}: {i[1]} ({i[2]} / {i[3]} / {i[4]})")
+    annum = lentokentat[0][2] # default
+    while True:
+        try:
+            kohde = int(input("Anna lentokentän numero: "))
+            if kohde < 0:
+                print("Anna oikean lentokentän numero.")
+                continue
+            elif kohde > len(lentokentat):
+                print("Anna oikean lentokentän numero.")
+                continue
+            annum = lentokentat[int(kohde)][2]
             break
         except:
             print("Anna numero.")

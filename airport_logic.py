@@ -39,3 +39,14 @@ def get_maat(maanosa="EU"):
     cursor.close()
     db.close()
     return result
+
+def get_lentokentat(maa="FI"):
+    db = connect_db()
+    cursor = db.cursor()
+    cursor.execute(f"""
+    SELECT iso_country,name,ident,type,municipality FROM airport WHERE iso_country = '{maa}' ORDER BY type,name
+    """)
+    result = cursor.fetchall()
+    cursor.close()
+    db.close()
+    return result
