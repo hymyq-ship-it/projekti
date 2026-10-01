@@ -17,3 +17,25 @@ def get_airport(ident):
     cursor.close()
     db.close()
     return result
+
+def get_maanosat():
+    db = connect_db()
+    cursor = db.cursor()
+    cursor.execute("""
+    SELECT continent FROM country GROUP BY continent ORDER BY continent ASC
+    """)
+    result = cursor.fetchall()
+    cursor.close()
+    db.close()
+    return result
+
+def get_maat(maanosa="EU"):
+    db = connect_db()
+    cursor = db.cursor()
+    cursor.execute(f"""
+    SELECT iso_country,name FROM country WHERE continent = '{maanosa}' ORDER BY name ASC
+    """)
+    result = cursor.fetchall()
+    cursor.close()
+    db.close()
+    return result
