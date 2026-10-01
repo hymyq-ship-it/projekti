@@ -16,7 +16,7 @@ def ratkaise_pulmat(maara):
         else:
             print(f"❌ Väärin! Oikea vastaus: {p['vastaus']}")
 
-    return pistee
+    return pisteet
 
 
 def laske_tarvittavat_pisteet(current_ident, target_ident):
