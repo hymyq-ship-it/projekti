@@ -2,8 +2,7 @@
 import mysql.connector
 
 def connect_db():
-    salasana = input("MYSQL Tietokannan salasana: ") 
-    # koska kaikilla on tämä, niin on helpompaa kysyä salasana kuin vaihtaa kaikkien johonkin tiettyyn...
+    salasana = input("MYSQL Tietokannan salasana: ")
     return mysql.connector.connect(
         host="localhost",
         port=3306,
