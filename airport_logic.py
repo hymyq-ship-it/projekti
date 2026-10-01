@@ -44,8 +44,8 @@ def get_lentokentat(maa="FI"):
     db = connect_db()
     cursor = db.cursor()
     cursor.execute(f"""
-    SELECT iso_country,name,ident,type,municipality FROM airport WHERE iso_country = '{maa}' ORDER BY type,name
-    """)
+    SELECT iso_country,name,ident,type,municipality FROM airport WHERE iso_country = '{maa}' AND type != 'closed' ORDER BY type,name
+    """) # ei käytetä closed lentokenttiä
     result = cursor.fetchall()
     cursor.close()
     db.close()
