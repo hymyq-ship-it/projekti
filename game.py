@@ -16,7 +16,7 @@ def ratkaise_pulmat(maara):
         else:
             print(f"❌ Väärin! Oikea vastaus: {p['vastaus']}")
 
-    return pisteet
+    return pistee
 
 
 def laske_tarvittavat_pisteet(current_ident, target_ident):
@@ -62,7 +62,7 @@ def main():
 
     current_ident = "EFHK"  # Helsinki-Vantaa
 
-    kohde = input("Anna kohteen ICAO-koodi (esim. EGLL, KJFK): ").upper()
+    kohde = input("Minne haluat matkustaa?: ").upper()
 
     jaljella = osta_tiketti(current_ident, kohde)
 
