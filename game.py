@@ -1,5 +1,5 @@
 import math
-from airport_logic import get_airport
+from airport_logic import get_airport,get_maanosat,get_maat
 from distance import haversine
 from puzzle import puzzles
 import random
@@ -54,13 +54,72 @@ def main():
     print("✈️ Tervetuloa lentopeliin!")
 
     current_ident = "EFHK"  # Helsinki-Vantaa
-
-    kohde = input("Anna kohteen ICAO-koodi (esim. EGLL, KJFK): ").upper()
+    continent = str(maanosa())
+    maa(continent)
+    #kohde = input("Anna kohteen ICAO-koodi (esim. EGLL, KJFK): ").upper()
 
     jaljella = osta_tiketti(current_ident, kohde)
 
     print(f"\n🛫 Nouset koneeseen... Tervemenoa kohteeseen {kohde}!")
     print(f"Pisteitä jäljellä: {jaljella}")
+
+maanosatermit = {
+    "EU": "Eurooppa",
+    "SA": "Etelä-Amerikka",
+    "NA": "Pohjois-Amerikka",
+    "AF": "Afrikka",
+    "AN": "Antarktika",
+    "AS": "Aasia",
+    "OC": "Oseania"
+}
+
+def maanosa():
+    print()
+    maanosat = get_maanosat()
+    num = -1
+    for i in maanosat:
+        num+=1
+        print(f"{num}: {maanosatermit[i[0]]}") # maanosa / continent
+    annum = "EU" # default
+    while True:
+        try:
+            kohde = int(input("Anna maanosan numero: "))
+            if kohde < 0:
+                print("Anna oikean maanosan numero.")
+                continue
+            elif kohde > len(maanosat):
+                print("Anna oikean maanosan numero.")
+                continue
+            annum = maanosat[int(kohde)][0]
+            break
+        except:
+            print("Anna numero.")
+    print(annum)
+    return annum
+
+def maa(continent): # default on EU
+    print()
+    maat_maanosassa = get_maat(maanosa=continent)
+    num = -1
+    for i in maat_maanosassa:
+        num+=1
+        print(f"{num}: {i[1]}")
+    annum = maat_maanosassa[0][0] # default
+    while True:
+        try:
+            kohde = int(input("Anna maan numero: "))
+            if kohde < 0:
+                print("Anna oikean maan numero.")
+                continue
+            elif kohde > len(maat_maanosassa):
+                print("Anna oikean maan numero.")
+                continue
+            annum = maat_maanosassa[int(kohde)][0]
+            break
+        except:
+            print("Anna numero.")
+    print(annum)
+    return annum
 
 
 main()

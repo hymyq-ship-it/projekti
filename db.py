@@ -1,6 +1,7 @@
 import mysql.connector
 salasana = ""
 def connect_db():
+    global salasana
     if salasana == "": # kysyy vain kerran
         salasana = input("MYSQL Tietokannan salasana: ")
     return mysql.connector.connect(
