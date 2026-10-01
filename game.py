@@ -23,11 +23,14 @@ def laske_tarvittavat_pisteet(current_ident, target_ident):
     current = get_airport(current_ident)
     target = get_airport(target_ident)
 
+    if target is None:
+        print("❌ Lentokenttää ei löytynyt. Tarkista ICAO-koodi.")
+        return None
+
     lat1, lon1 = current[2], current[3]
     lat2, lon2 = target[2], target[3]
 
     distance = haversine(lat1, lon1, lat2, lon2)
-
     needed_points = math.ceil(distance / 1000)
 
     print(f"\n✈️ Matka {current[1]} -> {target[1]} on {distance:.0f} km")
@@ -38,6 +41,10 @@ def laske_tarvittavat_pisteet(current_ident, target_ident):
 
 def osta_tiketti(current_ident, target_ident):
     hinta = laske_tarvittavat_pisteet(current_ident, target_ident)
+
+    if hinta is None:
+        return None
+
     pisteet = 0
 
     while pisteet < hinta:
@@ -59,8 +66,12 @@ def main():
 
     jaljella = osta_tiketti(current_ident, kohde)
 
+    if jaljella is None:
+        return
+
     print(f"\n🛫 Nouset koneeseen... Tervemenoa kohteeseen {kohde}!")
     print(f"Pisteitä jäljellä: {jaljella}")
 
-print("\nKiitos pelaamisesta! Toivottavasti nautit pelistä. 😊")
+
 main()
+print("\nKiitos pelaamisesta! Toivottavasti nautit pelistä. 😊")
