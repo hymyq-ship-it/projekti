@@ -17,10 +17,10 @@ def ratkaise_pulmat(maara,lisakysymykset):
             pisteet += 1
         else:
             print(f"❌ Väärin! Oikea vastaus: {p['vastaus']}")
-    if lisakysymykset:
+    if lisakysymykset and pisteet > 0:
         jatkaa = input("Haluatko vielä jatkaa kysymyksien kanssa? (joo/ei): ").lower()
         if jatkaa == "joo":
-            pisteet+=ratkaise_pulmat(1)
+            pisteet+=ratkaise_pulmat(1,True)
     return pisteet
 
 
