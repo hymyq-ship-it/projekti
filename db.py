@@ -1,10 +1,11 @@
 import mysql.connector
-import toinen
-def get_first_airport_id():
-    db = toinen.connect_db()
-    cursor = db.cursor()
-    cursor.execute("SELECT id FROM airport ORDER BY id LIMIT 1")
-    result = cursor.fetchone()
-    cursor.close()
-    db.close()
-    return result[0]
+
+def connect_db():
+    salasana = input("MYSQL Tietokannan salasana: ")
+    return mysql.connector.connect(
+        host="localhost",
+        port=3306,
+        user="root",
+        password=salasana,
+        database="flight_game"
+    )
