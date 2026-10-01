@@ -33,8 +33,9 @@ def ratkaise_pulmat(maara):
             pisteet += 1 
         else:
             print(f"❌ Väärin! Oikea vastaus: {p['vastaus']}")
+            vastaus = input(f"\n🧩 {p['kysymys']} ").strip().lower()
         return pisteet
-
+     pisteet += ratkaise_pulmat(1)
 def osta_tiketti(hinta):
     pisteet = 0 
     while pisteet < hinta:
