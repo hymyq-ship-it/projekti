@@ -1,5 +1,5 @@
 import math
-from airport_logic import get_airport
+from airport_logic import find_airport_by_name, get_airport
 from distance import haversine
 from puzzle import puzzles
 import random
@@ -9,12 +9,12 @@ def ratkaise_pulmat(maara):
     kysymykset = random.sample(puzzles, maara)
 
     for p in kysymykset:
-        vastaus = input(f"\n🧩 {p['kysymys']} ").strip().lower()
+        vastaus = input(f"\n {p['kysymys']} ").strip().lower()
         if vastaus == p["vastaus"].lower():
-            print("✅ Oikein! +1 piste")
+            print("Oikein! +1 piste")
             pisteet += 1
         else:
-            print(f"❌ Väärin! Oikea vastaus: {p['vastaus']}")
+            print(f" Väärin! Oikea vastaus: {p['vastaus']}")
 
     return pisteet
 
@@ -24,7 +24,7 @@ def laske_tarvittavat_pisteet(current_ident, target_ident):
     target = get_airport(target_ident)
 
     if target is None:
-        print("❌ Lentokenttää ei löytynyt. Tarkista ICAO-koodi.")
+        print(" Lentokenttää ei löytynyt. Tarkista ICAO-koodi.")
         return None
 
     lat1, lon1 = current[2], current[3]
@@ -48,11 +48,11 @@ def osta_tiketti(current_ident, target_ident):
     pisteet = 0
 
     while pisteet < hinta:
-        print(f"\n💰 Tarvitset {hinta} pistettä. Sinulla on {pisteet}.")
+        print(f"\n Tarvitset {hinta} pistettä. Sinulla on {pisteet}.")
         print("Ratkaise pulmia ansaitaksesi pisteitä!")
         pisteet += ratkaise_pulmat(1)
 
-    print(f"\n🎫 Hei! Olet kerännyt tarpeeksi pisteitä ({pisteet}).")
+    print(f"\n Hei! Olet kerännyt tarpeeksi pisteitä ({pisteet}).")
     print("Pääset lentokoneeseen!")
     return pisteet - hinta
 
@@ -62,7 +62,20 @@ def main():
 
     current_ident = "EFHK"  # Helsinki-Vantaa
 
-    kohde = input("Minne haluat matkustaa?: ").upper()
+    kohde_syote = input("Minne haluat matkustaa? ").strip()
+
+    # ✔ ICAO-koodi (4 kirjainta)
+    if len(kohde_syote) == 4 and kohde_syote.isalpha():
+        kohde = kohde_syote.upper()
+
+    else:
+        #  Kaupunki / lentokenttä / maa
+        airport = find_airport_by_name(kohde_syote)
+        if airport is None:
+            print(" Kohdetta ei löytynyt. Kokeile toista kaupunkia tai ICAO-koodia.")
+            return
+        kohde = airport[0]
+        print(f" Matkustat lentokentälle: {airport[1]} ({kohde})")
 
     jaljella = osta_tiketti(current_ident, kohde)
 
@@ -73,5 +86,12 @@ def main():
     print(f"Pisteitä jäljellä: {jaljella}")
 
 
-main()
-print("\nKiitos pelaamisesta! Toivottavasti nautit pelistä. 😊")
+#  TOISTO: pelaaja voi matkustaa uudelleen
+while True:
+    main()
+
+    vastaus = input("\nHaluatko explore ja matkustaa muihin maihin? (k/e): ").lower()
+
+    if vastaus != "k":
+        print("\nKiitos pelaamisesta! Toivottavasti nautit pelistä. 😊")
+        break
