@@ -72,8 +72,6 @@ def osta_tiketti(current_ident, target_ident):
 
 
 def main():
-    print("✈️ Tervetuloa lentopeliin!")
-    sleep(ODOTUS)
 
     current_ident = "EFHK"  # Helsinki-Vantaa
 
@@ -99,8 +97,11 @@ def main():
     print(f"Pisteitä jäljellä: {jaljella}")
 
 
+print("✈️ Tervetuloa lentopeliin!")
+sleep(ODOTUS)
 while True:
-    main()
+    if main() == None:
+        continue
     vastaus = input("\nHaluatko explore ja matkustaa muihin maihin? (k/e): ").lower()
     if vastaus != "k":
         print("\nKiitos pelaamisesta! Toivottavasti nautit pelistä. 😊")
