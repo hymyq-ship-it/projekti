@@ -95,6 +95,7 @@ def main():
 
     print(f"\n🛫 Nouset koneeseen... Tervemenoa kohteeseen {kohde}!")
     print(f"Pisteitä jäljellä: {jaljella}")
+    return True
 
 
 print("✈️ Tervetuloa lentopeliin!")
